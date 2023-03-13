@@ -302,8 +302,13 @@ namespace RotmgClient.Networking
 
             for (int i = 0; i < packet.Tiles.Length; i++)
             {
-                Debug.Log("New tile : " + packet.Tiles[i].x + ", " + packet.Tiles[i].y + ", type=" + packet.Tiles[i].type);
                 GameMap.Instance.AddTile(packet.Tiles[i]);
+            }
+
+            /* DEBUG
+            for (int i = 0; i < packet.Tiles.Length; i++)
+            {
+                Debug.Log("New tile : " + packet.Tiles[i].x + ", " + packet.Tiles[i].y + ", type=" + packet.Tiles[i].type);
             }
 
             for (int i = 0; i < packet.NewObjs.Length; i++)
@@ -316,6 +321,7 @@ namespace RotmgClient.Networking
             {
                 Debug.Log("Drops : " + packet.Drops[i]);
             }
+            */
         }
 
         private void OnNewTick(NewTickPacket packet)
