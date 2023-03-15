@@ -82,4 +82,9 @@ public class GameMap : MonoBehaviour
     {
         newObjects.Push(objectData);
     }
+
+    public GameObject GetGameObject(int objectId)
+    {
+        return objectDict[objectId];
+    }
 }

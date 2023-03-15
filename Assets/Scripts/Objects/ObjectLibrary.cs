@@ -25,7 +25,7 @@ namespace RotmgClient.Objects
         private static readonly Dictionary<ushort, string> typeToDisplayIdLibrary = new Dictionary<ushort, string>();
         //private static readonly Dictionary<ushort, AnimationsData> animationsDataLibrary = new Dictionary<ushort, AnimationsData>();
 
-        public static void ParseFromXML(XmlDocument xml)
+    public static void ParseFromXML(XmlDocument xml)
         {
             foreach (XmlNode node in xml.DocumentElement.SelectNodes("Object"))
             {
@@ -35,6 +35,10 @@ namespace RotmgClient.Objects
                 try
                 {
                     className = node.SelectSingleNode("Class").InnerText;
+                    if (className == "GameObject")
+                    {
+                        className = "Rotmg" + className;
+                    }
                 }
                 catch (Exception e)
                 {
@@ -114,6 +118,13 @@ namespace RotmgClient.Objects
         {
             if (typeToClassName.TryGetValue(objectType, out string className))
             {
+                Type type = Type.GetType("RotmgClient.Objects." + className);
+                if (type != null)
+                {
+                    GameObject gameObject = new GameObject(className);
+                    gameObject.AddComponent(type);
+                    return gameObject;
+                }
                 return new GameObject(className);
             }
             else

@@ -14,11 +14,14 @@ using System.Runtime.Serialization;
 using System.Json;
 using UnityEngine;
 using System.Runtime.CompilerServices;
+using RotmgClient.Objects;
 
 namespace RotmgClient.Networking
 {
     public class Client : MonoBehaviour
     {
+        public static Client Instance;
+
         [SerializeField]
         private string host = "127.0.0.1";
         [SerializeField]
@@ -28,6 +31,9 @@ namespace RotmgClient.Networking
         private string guid;
         [SerializeField]
         private string password;
+
+        public int lastUpdate;
+        public int lastTickId;
 
         private TcpClient client;
         private NetworkStream? nStream;
@@ -43,6 +49,15 @@ namespace RotmgClient.Networking
         private delegate void PacketCallback<T>(T packet) where T : Packet;
         private Dictionary<PacketId, Type> incomingPackets;
         private Dictionary<Type, object> packetCallbacks;
+
+        private void Awake()
+        {
+            if (Instance != null)
+            {
+                Destroy(Instance);
+            }
+            Instance = this;
+        }
 
         void Start() 
         {
@@ -128,6 +143,7 @@ namespace RotmgClient.Networking
             client.EndConnect(ar);
             packetBuffer = new PacketBuffer();
             nStream = client.GetStream();
+            lastUpdate = (int)(DateTime.UtcNow - System.Diagnostics.Process.GetCurrentProcess().StartTime.ToUniversalTime()).TotalMilliseconds;
 
             Packet? packet = ar.AsyncState as Packet;
 
@@ -329,6 +345,16 @@ namespace RotmgClient.Networking
                 pT.Text = "Sending messages! " + (newTickCount / 100) + 1;
                 SendPacket(pT);
             }
+
+            foreach (ObjectStatusData objectStatusData in packet.Statuses)
+            {
+                GameObject gO = GameMap.Instance.GetGameObject(objectStatusData.objectId);
+                if (gO.TryGetComponent(out RotmgGameObject rotmgGameObject))
+                {
+                    rotmgGameObject.OnTickPos(objectStatusData.pos.x, objectStatusData.pos.y, packet.TickTime, packet.TickId);
+                }
+            }
+            lastTickId = packet.TickId;
             /*
             // Debug
             for (int i = 0; i < packet.Statuses.Length; i++)
