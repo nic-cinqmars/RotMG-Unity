@@ -21,8 +21,25 @@ namespace Assets.Scripts.Util
             }
         }
 
+        public SpriteSet()
+        {
+            Texture2D texture2D = Resources.Load<Texture2D>("Sprites/lofiChar");
+            List<Sprite> sprites = new List<Sprite>();
+            for (int x = 0; x < texture2D.width / 8; x++) 
+            {
+                for (int y = 0; y < texture2D.height / 8; y++)
+                {
+                    Rect rect = new Rect(x * 8, y * 8, 8, 8);
+                    sprites.Add(Sprite.Create(texture2D, rect, new Vector2(0.5f, 0.5f)));
+                }
+            }
+        }
+
         public Sprite GetSpriteFromIndex(ushort index)
         {
+            if (index > sprites.Count)
+                return null;
+
             return sprites[index];
         }
     }

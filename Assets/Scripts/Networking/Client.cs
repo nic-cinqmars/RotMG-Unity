@@ -83,15 +83,6 @@ namespace RotmgClient.Networking
                     }
                 }
             }
-
-            /*
-            packetCallbacks = new Dictionary<Type, object>();
-            HookPacket<QueuePingPacket>(OnQueuePing);
-            HookPacket<PingPacket>(OnPing);
-            HookPacket<MapInfoPacket>(OnMapInfo);
-            HookPacket<AccountListPacket>(OnAccountList);
-            HookPacket<UpdatePacket>(OnUpdate);
-            */
         }
 
         private void HookPacket<T>(PacketCallback<T> callback) where T : Packet
@@ -303,6 +294,11 @@ namespace RotmgClient.Networking
             for (int i = 0; i < packet.Tiles.Length; i++)
             {
                 GameMap.Instance.AddTile(packet.Tiles[i]);
+            }
+
+            for (int i = 0; i < packet.NewObjs.Length; i++)
+            {
+                GameMap.Instance.AddObject(packet.NewObjs[i]);
             }
 
             /* DEBUG

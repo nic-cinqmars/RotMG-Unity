@@ -10,7 +10,7 @@ namespace RotmgClient.Util
 {
     public static class AssetLibrary
     {
-        private static readonly Sprite unsetSprite = Resources.Load<Sprite>("Sprites/UnsetTexture");
+        private static readonly Sprite unknownSprite = Resources.Load<Sprite>("Sprites/UnsetTexture");
         private static readonly Dictionary<string, SpriteSet> spriteSets = new Dictionary<string, SpriteSet>();
 
         public static void AddSpriteSet(string spriteSetID, string spriteSheetPath)
@@ -26,16 +26,21 @@ namespace RotmgClient.Util
                 Sprite sprite = spriteSet.GetSpriteFromIndex(index);
                 if (sprite == null)
                 {
-                    Debug.LogErrorFormat("Could not find sprite at index '{0}' in sprite set with id '{1}'.", index.ToString("0x"), spriteSetID);
-                    sprite = unsetSprite;
+                    Debug.LogErrorFormat("Could not find sprite at index '{0}' in sprite set with id '{1}'!", "0x" + index.ToString("x"), spriteSetID);
+                    sprite = unknownSprite;
                 }
                 return sprite;
             }
             else
             {
-                Debug.LogErrorFormat("Could not find sprite set with id '{0}'.", spriteSetID);
-                return unsetSprite;
+                Debug.LogErrorFormat("Could not find sprite set with id '{0}'!", spriteSetID);
+                return unknownSprite;
             }
+        }
+
+        public static Sprite GetUnknownSprite()
+        {
+            return unknownSprite;
         }
 
     }
