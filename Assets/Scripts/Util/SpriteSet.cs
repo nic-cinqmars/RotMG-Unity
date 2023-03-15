@@ -11,6 +11,20 @@ namespace Assets.Scripts.Util
     {
         private List<Sprite> sprites;
 
+        public SpriteSet(Texture2D spriteSheet, int spriteWidth, int spriteHeight)
+        {
+            sprites = new List<Sprite>();
+            for (int y = 1; y < (spriteSheet.height / spriteHeight) + 1; y++)
+            {
+                for (int x = 0; x < spriteSheet.width / spriteWidth; x++)
+                {
+                    Rect rect = new Rect(x * spriteWidth, spriteSheet.height - (y * spriteHeight), spriteWidth, spriteHeight);
+                    sprites.Add(Sprite.Create(spriteSheet, rect, new Vector2(0.5f, 0.5f), 8));
+                }
+            }
+        }
+
+        /* Old
         public SpriteSet(string spriteSheet)
         {
             sprites = new List<Sprite>();
@@ -20,24 +34,11 @@ namespace Assets.Scripts.Util
                 sprites.Add(sprite);
             }
         }
-
-        public SpriteSet()
-        {
-            Texture2D texture2D = Resources.Load<Texture2D>("Sprites/lofiChar");
-            List<Sprite> sprites = new List<Sprite>();
-            for (int x = 0; x < texture2D.width / 8; x++) 
-            {
-                for (int y = 0; y < texture2D.height / 8; y++)
-                {
-                    Rect rect = new Rect(x * 8, y * 8, 8, 8);
-                    sprites.Add(Sprite.Create(texture2D, rect, new Vector2(0.5f, 0.5f)));
-                }
-            }
-        }
+        */
 
         public Sprite GetSpriteFromIndex(ushort index)
         {
-            if (index > sprites.Count)
+            if (index >= sprites.Count)
                 return null;
 
             return sprites[index];

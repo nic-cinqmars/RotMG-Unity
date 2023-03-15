@@ -11,11 +11,25 @@ namespace RotmgClient.Util
     public static class AssetLibrary
     {
         private static readonly Sprite unknownSprite = Resources.Load<Sprite>("Sprites/UnsetTexture");
+        private static readonly Dictionary<string, Texture2D> spriteSheets = new Dictionary<string, Texture2D>();
         private static readonly Dictionary<string, SpriteSet> spriteSets = new Dictionary<string, SpriteSet>();
 
-        public static void AddSpriteSet(string spriteSetID, string spriteSheetPath)
+        public static void AddSpriteSet(string spriteSetID, string spriteSheetPath, int spriteWidth, int spriteHeight)
         {
-            SpriteSet spriteSet = new SpriteSet(spriteSheetPath);
+            Debug.LogFormat("Adding sprite sheet with id '{0}'.", spriteSetID);
+            Texture2D currentSpriteSheet;
+            if (spriteSheets.TryGetValue(spriteSheetPath, out Texture2D spriteSheet))
+            {
+                currentSpriteSheet = spriteSheet;
+            }
+            else
+            {
+                Texture2D newSpriteSheet = Resources.Load<Texture2D>(spriteSheetPath);
+                spriteSheets.Add(spriteSheetPath, newSpriteSheet);
+                currentSpriteSheet = newSpriteSheet;
+            }
+
+            SpriteSet spriteSet = new SpriteSet(currentSpriteSheet, spriteWidth, spriteHeight);
             spriteSets.Add(spriteSetID, spriteSet);
         }
 

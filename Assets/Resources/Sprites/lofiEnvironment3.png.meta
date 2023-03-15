@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -43,18 +43,18 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 0
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 8
+  spritePixelsToUnits: 0.001
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 8
+  textureType: 0
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -8926,8 +8926,8 @@ TextureImporter:
       lofiEnvironment3_397: 968801753
       lofiEnvironment3_202: -83495869
       lofiEnvironment3_180: 1558990770
-      lofiEnvironment3_52: -1635072575
       lofiEnvironment3_292: -385956933
+      lofiEnvironment3_52: -1635072575
       lofiEnvironment3_150: -2109702223
       lofiEnvironment3_7: 827006773
       lofiEnvironment3_307: -448376523
@@ -8966,11 +8966,11 @@ TextureImporter:
       lofiEnvironment3_91: 834018559
       lofiEnvironment3_369: -95721239
       lofiEnvironment3_348: -161649747
-      lofiEnvironment3_376: 1296634709
+      lofiEnvironment3_405: -925700171
       lofiEnvironment3_238: -1748422518
       lofiEnvironment3_216: 1610450640
+      lofiEnvironment3_376: 1296634709
       lofiEnvironment3_64: 508339639
-      lofiEnvironment3_405: -925700171
       lofiEnvironment3_98: 1621377779
       lofiEnvironment3_366: -754684758
       lofiEnvironment3_251: 847465027
@@ -9010,11 +9010,11 @@ TextureImporter:
       lofiEnvironment3_106: -1934525229
       lofiEnvironment3_148: 1687441420
       lofiEnvironment3_113: -1089016647
+      lofiEnvironment3_170: 1152808401
       lofiEnvironment3_6: 57107607
       lofiEnvironment3_240: 864561852
-      lofiEnvironment3_170: 1152808401
-      lofiEnvironment3_258: 1467703762
       lofiEnvironment3_344: 1550253937
+      lofiEnvironment3_258: 1467703762
       lofiEnvironment3_191: -492524893
       lofiEnvironment3_324: 555268859
       lofiEnvironment3_156: -886207749
@@ -9086,8 +9086,9 @@ TextureImporter:
       lofiEnvironment3_60: 1349961068
       lofiEnvironment3_264: 1366323742
       lofiEnvironment3_395: -1944150267
-      lofiEnvironment3_8: 542252287
       lofiEnvironment3_278: -1598324436
+      lofiEnvironment3_8: 542252287
+      lofiEnvironment3_317: -592691980
       lofiEnvironment3_379: -1814523993
       lofiEnvironment3_118: -1616562033
       lofiEnvironment3_115: 11592513
@@ -9096,7 +9097,6 @@ TextureImporter:
       lofiEnvironment3_305: 844291178
       lofiEnvironment3_321: 1426213558
       lofiEnvironment3_387: -347039727
-      lofiEnvironment3_317: -592691980
       lofiEnvironment3_124: 1439146575
       lofiEnvironment3_94: 2012190788
       lofiEnvironment3_119: -929346171
@@ -9132,8 +9132,8 @@ TextureImporter:
       lofiEnvironment3_241: -941266768
       lofiEnvironment3_359: -851878470
       lofiEnvironment3_17: 1706655093
-      lofiEnvironment3_187: -1892285890
       lofiEnvironment3_274: -1511503666
+      lofiEnvironment3_187: -1892285890
       lofiEnvironment3_103: 38987710
       lofiEnvironment3_152: 149679267
       lofiEnvironment3_213: 495386075
@@ -9146,8 +9146,8 @@ TextureImporter:
       lofiEnvironment3_266: 856503224
       lofiEnvironment3_34: 43808012
       lofiEnvironment3_151: -68763154
-      lofiEnvironment3_308: 1810975554
       lofiEnvironment3_367: 560726290
+      lofiEnvironment3_308: 1810975554
       lofiEnvironment3_221: -536702418
       lofiEnvironment3_120: -522353102
       lofiEnvironment3_173: 1098038235
@@ -9165,8 +9165,8 @@ TextureImporter:
       lofiEnvironment3_360: 381797618
       lofiEnvironment3_267: -834399959
       lofiEnvironment3_93: -862564532
-      lofiEnvironment3_47: -8121989
       lofiEnvironment3_288: -1587350016
+      lofiEnvironment3_47: -8121989
       lofiEnvironment3_112: -660443742
       lofiEnvironment3_403: 2038844163
       lofiEnvironment3_16: 545985244
@@ -9265,8 +9265,8 @@ TextureImporter:
       lofiEnvironment3_281: 666351199
       lofiEnvironment3_161: -2019278926
       lofiEnvironment3_39: 1048775739
-      lofiEnvironment3_206: -966101096
       lofiEnvironment3_0: 1497401983
+      lofiEnvironment3_206: -966101096
       lofiEnvironment3_233: -1478567681
   spritePackingTag: 
   pSDRemoveMatte: 0

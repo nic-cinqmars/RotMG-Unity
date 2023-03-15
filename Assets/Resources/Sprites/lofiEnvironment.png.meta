@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -43,18 +43,18 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 0
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 8
+  spritePixelsToUnits: 0.001
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 8
+  textureType: 0
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -5550,15 +5550,15 @@ TextureImporter:
       lofiEnvironment_63: 1577328468
       lofiEnvironment_18: -867680437
       lofiEnvironment_33: 1150192997
+      lofiEnvironment_242: -846849931
       lofiEnvironment_222: 1420857310
       lofiEnvironment_220: 1862883026
+      lofiEnvironment_187: -1536517374
       lofiEnvironment_79: -2069194432
       lofiEnvironment_174: -1272710930
-      lofiEnvironment_187: -1536517374
       lofiEnvironment_118: 1068795848
       lofiEnvironment_192: -186338762
       lofiEnvironment_184: 672596012
-      lofiEnvironment_242: -846849931
       lofiEnvironment_36: -936852784
       lofiEnvironment_59: -805355969
       lofiEnvironment_214: -1596532258
@@ -5612,6 +5612,7 @@ TextureImporter:
       lofiEnvironment_247: 1313410864
       lofiEnvironment_186: -1472944108
       lofiEnvironment_235: -1121095597
+      lofiEnvironment_244: -1976686916
       lofiEnvironment_129: -1335548075
       lofiEnvironment_153: 2008225727
       lofiEnvironment_27: -491613767
@@ -5619,19 +5620,18 @@ TextureImporter:
       lofiEnvironment_53: 218451273
       lofiEnvironment_57: -349457755
       lofiEnvironment_61: 906102137
-      lofiEnvironment_244: -1976686916
       lofiEnvironment_253: 1503841887
       lofiEnvironment_250: 445511395
       lofiEnvironment_55: -1501416080
       lofiEnvironment_9: 1364752922
-      lofiEnvironment_141: -2010469145
+      lofiEnvironment_170: 1032774003
       lofiEnvironment_34: -1849541212
       lofiEnvironment_32: 1082119241
-      lofiEnvironment_170: 1032774003
       lofiEnvironment_49: 1588015002
       lofiEnvironment_91: -201561498
       lofiEnvironment_185: -1990160690
       lofiEnvironment_14: -2109027945
+      lofiEnvironment_141: -2010469145
       lofiEnvironment_234: 2091817781
       lofiEnvironment_171: -300058634
       lofiEnvironment_252: 2359563
@@ -5643,9 +5643,9 @@ TextureImporter:
       lofiEnvironment_19: 7647179
       lofiEnvironment_179: -1422611670
       lofiEnvironment_48: 2111894331
-      lofiEnvironment_71: -153761080
       lofiEnvironment_132: -329021481
       lofiEnvironment_175: -838656476
+      lofiEnvironment_71: -153761080
       lofiEnvironment_64: 1727809890
       lofiEnvironment_93: -1172440164
       lofiEnvironment_183: 1785118260

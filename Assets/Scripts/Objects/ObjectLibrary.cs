@@ -27,13 +27,24 @@ namespace RotmgClient.Objects
 
         public static void ParseFromXML(XmlDocument xml)
         {
-            foreach (XmlNode node in xml.DocumentElement.ChildNodes)
+            foreach (XmlNode node in xml.DocumentElement.SelectNodes("Object"))
             {
                 ushort type = Convert.ToUInt16(node.Attributes["type"].Value, 16);
                 string id = node.Attributes["id"].Value;
-                string className = node.SelectSingleNode("Class").InnerText;
-                
-                typeToClassName.Add(type, className);
+                string className = "Unknown";
+                try
+                {
+                    className = node.SelectSingleNode("Class").InnerText;
+                }
+                catch (Exception e)
+                {
+                    UnityEngine.Debug.LogErrorFormat("Object with type '{0}' has no class!", "0x" + type.ToString("x"));
+                }
+
+                if (!typeToClassName.TryAdd(type, className))
+                {
+                    UnityEngine.Debug.LogErrorFormat("Already added '{0}' to '{1}'!", "0x" + type.ToString("x"), className);
+                }
 
                 string displayId = id;
                 if (node.SelectSingleNode("DisplayId") != null)
@@ -82,7 +93,6 @@ namespace RotmgClient.Objects
                         // Add AnimationsData to library
                     }
                 }
-
             }
         }
 

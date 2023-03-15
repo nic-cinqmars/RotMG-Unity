@@ -12,6 +12,7 @@ namespace RotmgClient.Util
     public class TextureData
     {
         private Sprite textureSprite;
+        private List<TextureData> randomTextureData = null;
 
         public TextureData()
         {
@@ -30,11 +31,25 @@ namespace RotmgClient.Util
 
                 textureSprite = AssetLibrary.GetSpriteFromSet(spriteSetID, spriteIndex);
             }
+
+            XmlNode randomTextureNode = xml.SelectSingleNode("RandomTexture");
+            if (randomTextureNode != null)
+            {
+                randomTextureData = new List<TextureData>();
+                foreach (XmlNode texture in randomTextureNode.SelectNodes("Texture"))
+                {
+                    randomTextureData.Add(new TextureData(texture));
+                }
+            }
         }
 
-        public Sprite GetTextureSprite()
+        public Sprite GetTextureSprite(int random = 0)
         {
-            return textureSprite;
+            if (randomTextureData == null)
+                return textureSprite;
+
+            TextureData textureData = randomTextureData[random % randomTextureData.Count];
+            return textureData.GetTextureSprite();
         }
     }
 }

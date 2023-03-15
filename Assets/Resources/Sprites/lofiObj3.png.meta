@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -43,18 +43,18 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 0
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 8
+  spritePixelsToUnits: 0.001
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 8
+  textureType: 0
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -30356,7 +30356,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      lofiObj3_177: 360514500
+      lofiObj3_1334: 591008466
       lofiObj3_24: -1112836568
       lofiObj3_1145: -1672956784
       lofiObj3_52: -42052373
@@ -30414,8 +30414,8 @@ TextureImporter:
       lofiObj3_755: 1436974545
       lofiObj3_440: -908205687
       lofiObj3_269: -1469977352
-      lofiObj3_603: -879490893
       lofiObj3_888: 1608128910
+      lofiObj3_603: -879490893
       lofiObj3_614: -1099061148
       lofiObj3_1144: 789356195
       lofiObj3_1156: -73496974
@@ -30509,8 +30509,8 @@ TextureImporter:
       lofiObj3_633: 280791626
       lofiObj3_441: -1694605003
       lofiObj3_701: 1504261213
-      lofiObj3_27: 1998048855
       lofiObj3_1323: 738972039
+      lofiObj3_27: 1998048855
       lofiObj3_50: 695794798
       lofiObj3_986: -1052824702
       lofiObj3_1264: 2020618364
@@ -30541,13 +30541,13 @@ TextureImporter:
       lofiObj3_1043: -214602241
       lofiObj3_1368: -475579255
       lofiObj3_186: 173196512
-      lofiObj3_984: 967413953
       lofiObj3_1279: -1159366106
+      lofiObj3_984: 967413953
       lofiObj3_331: 650046770
-      lofiObj3_1274: -721454732
       lofiObj3_632: 1577919417
       lofiObj3_442: -1541962293
       lofiObj3_1385: -122137618
+      lofiObj3_1274: -721454732
       lofiObj3_5: 49911966
       lofiObj3_67: -405364080
       lofiObj3_217: 596605336
@@ -30588,8 +30588,8 @@ TextureImporter:
       lofiObj3_789: 1335646366
       lofiObj3_399: 1131263479
       lofiObj3_21: -1844010491
-      lofiObj3_723: -303089229
       lofiObj3_574: 309205736
+      lofiObj3_723: -303089229
       lofiObj3_97: -1096279656
       lofiObj3_1272: -431224750
       lofiObj3_981: 490152065
@@ -30715,11 +30715,11 @@ TextureImporter:
       lofiObj3_1181: 1437460460
       lofiObj3_869: -935261567
       lofiObj3_278: -277874224
-      lofiObj3_322: -1279327032
-      lofiObj3_524: -1160232217
       lofiObj3_1003: -1054195256
-      lofiObj3_229: 1562348030
+      lofiObj3_524: -1160232217
+      lofiObj3_322: -1279327032
       lofiObj3_1171: -938325809
+      lofiObj3_229: 1562348030
       lofiObj3_232: 464769602
       lofiObj3_908: 783020203
       lofiObj3_525: -1873611266
@@ -30757,9 +30757,9 @@ TextureImporter:
       lofiObj3_1367: -1883934853
       lofiObj3_201: -2072326296
       lofiObj3_220: 1420258543
-      lofiObj3_780: -424824564
       lofiObj3_926: 631763561
       lofiObj3_971: 1867049576
+      lofiObj3_780: -424824564
       lofiObj3_906: 79996123
       lofiObj3_569: -1119182304
       lofiObj3_297: 229211527
@@ -30805,14 +30805,14 @@ TextureImporter:
       lofiObj3_901: -599388369
       lofiObj3_1239: -714624900
       lofiObj3_197: 369731076
-      lofiObj3_446: -1084470278
       lofiObj3_728: -1639937487
+      lofiObj3_446: -1084470278
       lofiObj3_682: -1758476296
       lofiObj3_1054: 2034748441
       lofiObj3_95: 1821748693
-      lofiObj3_216: 117981338
       lofiObj3_344: -1306392657
       lofiObj3_704: -27057258
+      lofiObj3_216: 117981338
       lofiObj3_683: 445548893
       lofiObj3_338: -924401722
       lofiObj3_340: -345953636
@@ -31008,8 +31008,8 @@ TextureImporter:
       lofiObj3_312: 1580604776
       lofiObj3_1298: -1495943190
       lofiObj3_388: -549066246
-      lofiObj3_496: 2041512450
       lofiObj3_1193: 57557147
+      lofiObj3_496: 2041512450
       lofiObj3_910: 1575984696
       lofiObj3_1167: 1467437577
       lofiObj3_697: -1563267520
@@ -31022,8 +31022,8 @@ TextureImporter:
       lofiObj3_1318: -999836610
       lofiObj3_486: -695805570
       lofiObj3_1049: 2083805763
-      lofiObj3_1014: -1252802522
       lofiObj3_1405: -742142502
+      lofiObj3_1014: -1252802522
       lofiObj3_426: 270617030
       lofiObj3_520: 1340199359
       lofiObj3_947: 1101537807
@@ -31034,12 +31034,12 @@ TextureImporter:
       lofiObj3_1416: -1998462464
       lofiObj3_1423: 113035885
       lofiObj3_383: 1331022868
-      lofiObj3_310: -676020234
       lofiObj3_533: -1746765406
-      lofiObj3_620: -1478381819
+      lofiObj3_310: -676020234
       lofiObj3_1012: -897869279
-      lofiObj3_196: 1762053824
+      lofiObj3_620: -1478381819
       lofiObj3_1369: -229153777
+      lofiObj3_196: 1762053824
       lofiObj3_661: -1163891
       lofiObj3_1254: 1320591201
       lofiObj3_495: 440115605
@@ -31108,8 +31108,8 @@ TextureImporter:
       lofiObj3_507: 490144414
       lofiObj3_1209: 811355231
       lofiObj3_832: -9164233
-      lofiObj3_1214: 1820081479
       lofiObj3_1293: 516505677
+      lofiObj3_1214: 1820081479
       lofiObj3_604: -1255296115
       lofiObj3_677: 1010540505
       lofiObj3_571: 779349123
@@ -31157,8 +31157,8 @@ TextureImporter:
       lofiObj3_238: -2144606762
       lofiObj3_452: -2110613002
       lofiObj3_263: 1556107222
-      lofiObj3_579: 895340080
       lofiObj3_668: 639340884
+      lofiObj3_579: 895340080
       lofiObj3_962: -477462058
       lofiObj3_143: 1858143697
       lofiObj3_941: -1591212918
@@ -31272,10 +31272,10 @@ TextureImporter:
       lofiObj3_1409: -379004530
       lofiObj3_1360: -696223488
       lofiObj3_557: -1185752066
-      lofiObj3_319: -472116270
       lofiObj3_609: -1785069798
-      lofiObj3_807: -1276735311
+      lofiObj3_319: -472116270
       lofiObj3_1004: -1880032314
+      lofiObj3_807: -1276735311
       lofiObj3_368: -214342347
       lofiObj3_1084: -1281610768
       lofiObj3_1378: -1793049779
@@ -31338,11 +31338,11 @@ TextureImporter:
       lofiObj3_1096: 1306988030
       lofiObj3_270: 1090330835
       lofiObj3_1089: -1020484217
+      lofiObj3_1336: 433244463
       lofiObj3_1001: -1471212838
       lofiObj3_304: -760361214
       lofiObj3_432: -462521318
       lofiObj3_1249: 318592318
-      lofiObj3_1336: 433244463
       lofiObj3_73: -1511073774
       lofiObj3_276: 1560232252
       lofiObj3_424: 1510668929
@@ -31510,12 +31510,12 @@ TextureImporter:
       lofiObj3_542: 765662357
       lofiObj3_1230: -402600487
       lofiObj3_174: 1745428934
-      lofiObj3_404: -1221927140
+      lofiObj3_825: -1143041434
       lofiObj3_242: 303706203
       lofiObj3_1079: -790559996
-      lofiObj3_825: -1143041434
-      lofiObj3_855: -1613952500
       lofiObj3_882: 1971296258
+      lofiObj3_855: -1613952500
+      lofiObj3_404: -1221927140
       lofiObj3_563: -906748899
       lofiObj3_966: -1629160853
       lofiObj3_720: -1010572183
@@ -31616,9 +31616,9 @@ TextureImporter:
       lofiObj3_1009: 1061037999
       lofiObj3_1101: -1269832677
       lofiObj3_430: 1378464399
+      lofiObj3_1107: 643896902
       lofiObj3_774: -117535882
       lofiObj3_284: -354027199
-      lofiObj3_1107: 643896902
       lofiObj3_1151: 679822299
       lofiObj3_38: 1491613885
       lofiObj3_1115: 1936036716
@@ -31643,8 +31643,8 @@ TextureImporter:
       lofiObj3_570: 285083790
       lofiObj3_879: -1682964708
       lofiObj3_306: 944457093
-      lofiObj3_135: 1078433190
       lofiObj3_484: -819196095
+      lofiObj3_135: 1078433190
       lofiObj3_134: -324765842
       lofiObj3_1133: -54438931
       lofiObj3_1403: -764180953
@@ -31668,10 +31668,10 @@ TextureImporter:
       lofiObj3_150: -562145744
       lofiObj3_559: 1726861841
       lofiObj3_1027: 2142372964
-      lofiObj3_1170: 1253464087
       lofiObj3_1123: 86535096
       lofiObj3_159: -394485698
       lofiObj3_674: -1575546802
+      lofiObj3_1170: 1253464087
       lofiObj3_1183: -1753247074
       lofiObj3_1284: 410405285
       lofiObj3_912: -485904245
@@ -31795,7 +31795,7 @@ TextureImporter:
       lofiObj3_336: -1117553318
       lofiObj3_1143: 567413617
       lofiObj3_37: -1709828093
-      lofiObj3_1334: 591008466
+      lofiObj3_177: 360514500
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

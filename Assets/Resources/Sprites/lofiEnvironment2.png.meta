@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -43,18 +43,18 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 0
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 8
+  spritePixelsToUnits: 0.001
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 8
+  textureType: 0
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -10270,14 +10270,14 @@ TextureImporter:
       lofiEnvironment2_263: -1774853528
       lofiEnvironment2_45: 2140258802
       lofiEnvironment2_241: 1987955595
-      lofiEnvironment2_312: 201021604
       lofiEnvironment2_402: 1950314569
-      lofiEnvironment2_426: -941934084
+      lofiEnvironment2_312: 201021604
       lofiEnvironment2_226: 1562657406
       lofiEnvironment2_74: -1012480405
       lofiEnvironment2_12: -1361980114
       lofiEnvironment2_308: 532603310
       lofiEnvironment2_94: -1111444750
+      lofiEnvironment2_426: -941934084
       lofiEnvironment2_242: -331745607
       lofiEnvironment2_396: -958281349
       lofiEnvironment2_56: -11306942
@@ -10336,8 +10336,8 @@ TextureImporter:
       lofiEnvironment2_472: 2038432657
       lofiEnvironment2_4: 645804402
       lofiEnvironment2_71: -1375355513
-      lofiEnvironment2_355: 396676648
       lofiEnvironment2_437: 665750433
+      lofiEnvironment2_355: 396676648
       lofiEnvironment2_299: 1411312875
       lofiEnvironment2_147: -1346122350
       lofiEnvironment2_326: 41198376
@@ -10356,8 +10356,8 @@ TextureImporter:
       lofiEnvironment2_424: 404588848
       lofiEnvironment2_350: 842706366
       lofiEnvironment2_64: -86127436
-      lofiEnvironment2_403: -1655394350
       lofiEnvironment2_407: 1232888609
+      lofiEnvironment2_403: -1655394350
       lofiEnvironment2_401: -1036547113
       lofiEnvironment2_268: 2095669010
       lofiEnvironment2_163: -350584083
@@ -10436,13 +10436,13 @@ TextureImporter:
       lofiEnvironment2_234: -1676747852
       lofiEnvironment2_454: -1373601932
       lofiEnvironment2_423: 118300851
-      lofiEnvironment2_199: 1535553676
-      lofiEnvironment2_281: 998699640
+      lofiEnvironment2_81: 1449252721
       lofiEnvironment2_63: 1390692023
       lofiEnvironment2_160: -433982465
-      lofiEnvironment2_81: 1449252721
+      lofiEnvironment2_199: 1535553676
       lofiEnvironment2_468: -290120131
       lofiEnvironment2_15: 1284214238
+      lofiEnvironment2_281: 998699640
       lofiEnvironment2_41: -454968497
       lofiEnvironment2_471: 704588249
       lofiEnvironment2_368: -1010333209
@@ -10456,8 +10456,8 @@ TextureImporter:
       lofiEnvironment2_322: -1032285431
       lofiEnvironment2_325: 413388896
       lofiEnvironment2_168: 1579073008
-      lofiEnvironment2_408: -1009804099
       lofiEnvironment2_435: 1104040129
+      lofiEnvironment2_408: -1009804099
       lofiEnvironment2_73: -1669267629
       lofiEnvironment2_314: 1820887010
       lofiEnvironment2_169: 1726884234
@@ -10498,17 +10498,17 @@ TextureImporter:
       lofiEnvironment2_273: -65571176
       lofiEnvironment2_104: 1500490214
       lofiEnvironment2_85: -1620825789
-      lofiEnvironment2_404: 1003940676
-      lofiEnvironment2_306: -611798631
       lofiEnvironment2_445: 658217298
+      lofiEnvironment2_306: -611798631
+      lofiEnvironment2_404: 1003940676
       lofiEnvironment2_176: 1465916730
       lofiEnvironment2_91: -768480405
       lofiEnvironment2_155: -1580607600
       lofiEnvironment2_80: -985602182
       lofiEnvironment2_462: -537405200
       lofiEnvironment2_28: -1574961958
-      lofiEnvironment2_137: 891337822
       lofiEnvironment2_416: 517976727
+      lofiEnvironment2_137: 891337822
       lofiEnvironment2_264: 1685605546
       lofiEnvironment2_418: 806740037
       lofiEnvironment2_126: 882837885
