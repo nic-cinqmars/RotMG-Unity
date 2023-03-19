@@ -39,8 +39,6 @@ namespace RotmgClient.Networking
         private NetworkStream? nStream;
         private PacketBuffer packetBuffer;
 
-        public int newTickCount = 0;
-
         private int playerID = -1;
         private int charID = 1;
 
@@ -67,6 +65,11 @@ namespace RotmgClient.Networking
         private void OnApplicationQuit()
         {
             Disconnect();
+        }
+
+        void Update()
+        {
+            
         }
 
         private void SetupPacketHooks()
@@ -143,8 +146,6 @@ namespace RotmgClient.Networking
             client.EndConnect(ar);
             packetBuffer = new PacketBuffer();
             nStream = client.GetStream();
-            lastUpdate = (int)(DateTime.UtcNow - System.Diagnostics.Process.GetCurrentProcess().StartTime.ToUniversalTime()).TotalMilliseconds;
-
             Packet? packet = ar.AsyncState as Packet;
 
             if (packet != null)
@@ -304,6 +305,7 @@ namespace RotmgClient.Networking
 
         private void OnUpdate(UpdatePacket packet)
         {
+            Debug.Log("UpdatePacket");
             UpdateAckPacket updateAckPacket = new UpdateAckPacket();
             SendPacket(updateAckPacket);
 
@@ -338,14 +340,7 @@ namespace RotmgClient.Networking
 
         private void OnNewTick(NewTickPacket packet)
         {
-            newTickCount++;
-            if (newTickCount % 100 == 0)
-            {
-                PlayerText pT = new PlayerText();
-                pT.Text = "Sending messages! " + (newTickCount / 100) + 1;
-                SendPacket(pT);
-            }
-
+            lastUpdate = (int)(DateTime.UtcNow - System.Diagnostics.Process.GetCurrentProcess().StartTime.ToUniversalTime()).TotalMilliseconds;
             foreach (ObjectStatusData objectStatusData in packet.Statuses)
             {
                 GameObject gO = GameMap.Instance.GetGameObject(objectStatusData.objectId);

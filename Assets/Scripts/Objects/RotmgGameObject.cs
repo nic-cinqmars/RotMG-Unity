@@ -23,8 +23,9 @@ namespace RotmgClient.Objects
 
         public void OnTickPos(float x, float y, int tickTime, int tickID) 
         {
-        if (myLastTickId < Client.Instance.lastTickId) 
-            moveTo(tickPosition);
+            if (myLastTickId < Client.Instance.lastTickId) 
+                moveTo(tickPosition);
+
             lastTickUpdateTime = Client.Instance.lastUpdate;
             tickPosition.x = x;
             tickPosition.y = y;
