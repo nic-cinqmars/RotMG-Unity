@@ -19,7 +19,7 @@ public class GameMap : MonoBehaviour
 
     private Stack<ObjectData> newObjects;
 
-    private Dictionary<int, GameObject> objectDict;
+    private Dictionary<int, RotmgGameObject> objectDict;
 
     void Awake()
     {
@@ -41,7 +41,7 @@ public class GameMap : MonoBehaviour
         newGroundTiles = new Stack<GroundTileData>();
         newObjects = new Stack<ObjectData>();
         groundTiles = new Stack<GroundTile>();
-        objectDict = new Dictionary<int, GameObject>();
+        objectDict = new Dictionary<int, RotmgGameObject>();
     }
 
     void Update()
@@ -68,7 +68,9 @@ public class GameMap : MonoBehaviour
             spriteRenderer.sprite = ObjectLibrary.GetSpriteFromType(objectType);
             gO.transform.parent = gameObjectsTransform;
             gO.transform.localPosition = new Vector2(objectData.status.pos.x, objectData.status.pos.y);
-            objectDict.Add(objectData.status.objectId, gO);
+            RotmgGameObject rotmgGameObject = gO.GetComponent<RotmgGameObject>();
+            rotmgGameObject.AddTo(this, gO.transform.localPosition);
+            objectDict.Add(objectData.status.objectId, rotmgGameObject);
         }
     }
 
@@ -83,7 +85,7 @@ public class GameMap : MonoBehaviour
         newObjects.Push(objectData);
     }
 
-    public GameObject GetGameObject(int objectId)
+    public RotmgGameObject GetGameObject(int objectId)
     {
         return objectDict[objectId];
     }

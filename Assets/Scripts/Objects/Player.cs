@@ -13,7 +13,7 @@ namespace RotmgClient.Objects
 
         void Update()
         {
-
+            base.Update();
         }
     }
 }

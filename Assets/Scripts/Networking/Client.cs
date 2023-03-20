@@ -48,6 +48,8 @@ namespace RotmgClient.Networking
         private Dictionary<PacketId, Type> incomingPackets;
         private Dictionary<Type, object> packetCallbacks;
 
+        private Stack<Action> callbacksStack = new Stack<Action>();
+
         private void Awake()
         {
             if (Instance != null)
@@ -69,7 +71,15 @@ namespace RotmgClient.Networking
 
         void Update()
         {
-            
+            if (isConnected)
+            {
+                lastUpdate = (int)(DateTime.UtcNow - System.Diagnostics.Process.GetCurrentProcess().StartTime.ToUniversalTime()).TotalMilliseconds;
+            }
+            while (callbacksStack.Count > 0)
+            {
+                var callback = callbacksStack.Pop();
+                callback.Invoke();
+            }
         }
 
         private void SetupPacketHooks()
@@ -245,7 +255,10 @@ namespace RotmgClient.Networking
                         packet.Read(pR);
                         if (packetCallbacks.TryGetValue(packetType, out object? callback))
                         {
-                            _ = (callback as Delegate).Method.Invoke((callback as Delegate).Target, new object[] { packet });
+                            callbacksStack.Push(() =>
+                            {
+                                _ = (callback as Delegate).Method.Invoke((callback as Delegate).Target, new object[] { packet });
+                            });
                         }
                         else
                         {
@@ -340,11 +353,10 @@ namespace RotmgClient.Networking
 
         private void OnNewTick(NewTickPacket packet)
         {
-            lastUpdate = (int)(DateTime.UtcNow - System.Diagnostics.Process.GetCurrentProcess().StartTime.ToUniversalTime()).TotalMilliseconds;
             foreach (ObjectStatusData objectStatusData in packet.Statuses)
             {
-                GameObject gO = GameMap.Instance.GetGameObject(objectStatusData.objectId);
-                if (gO.TryGetComponent(out RotmgGameObject rotmgGameObject))
+                RotmgGameObject rotmgGameObject = GameMap.Instance.GetGameObject(objectStatusData.objectId);
+                if (rotmgGameObject != null)
                 {
                     rotmgGameObject.OnTickPos(objectStatusData.pos.x, objectStatusData.pos.y, packet.TickTime, packet.TickId);
                 }
