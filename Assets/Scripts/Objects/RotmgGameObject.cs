@@ -26,7 +26,6 @@ namespace RotmgClient.Objects
         {
             if (movementVector.x != 0 || movementVector.y != 0)
             {
-                Debug.Log("RotmgGameObjectUpdate");
                 if (myLastTickId < Client.Instance.lastTickId)
                 {
                     movementVector.x = 0;

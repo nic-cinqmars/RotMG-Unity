@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Util;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +11,7 @@ namespace RotmgClient.Util
     {
         private static readonly Sprite unknownSprite = Resources.Load<Sprite>("Sprites/UnsetTexture");
         private static readonly Dictionary<string, Texture2D> spriteSheets = new Dictionary<string, Texture2D>();
-        private static readonly Dictionary<string, SpriteSet> spriteSets = new Dictionary<string, SpriteSet>();
+        private static readonly Dictionary<string, ImageSet> spriteSets = new Dictionary<string, ImageSet>();
 
         public static void AddSpriteSet(string spriteSetID, string spriteSheetPath, int spriteWidth, int spriteHeight)
         {
@@ -29,13 +28,13 @@ namespace RotmgClient.Util
                 currentSpriteSheet = newSpriteSheet;
             }
 
-            SpriteSet spriteSet = new SpriteSet(currentSpriteSheet, spriteWidth, spriteHeight);
+            ImageSet spriteSet = new ImageSet(currentSpriteSheet, spriteWidth, spriteHeight);
             spriteSets.Add(spriteSetID, spriteSet);
         }
 
         public static Sprite GetSpriteFromSet(string spriteSetID, ushort index)
         {
-            if (spriteSets.TryGetValue(spriteSetID, out SpriteSet spriteSet))
+            if (spriteSets.TryGetValue(spriteSetID, out ImageSet spriteSet))
             {
                 Sprite sprite = spriteSet.GetSpriteFromIndex(index);
                 if (sprite == null)

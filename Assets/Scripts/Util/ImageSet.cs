@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts.Util
+namespace RotmgClient.Util
 {
-    public class SpriteSet
+    public class ImageSet
     {
         private List<Sprite> sprites;
 
-        public SpriteSet(Texture2D spriteSheet, int spriteWidth, int spriteHeight)
+        public ImageSet(Texture2D spriteSheet, int spriteWidth, int spriteHeight)
         {
             sprites = new List<Sprite>();
             for (int y = 1; y < (spriteSheet.height / spriteHeight) + 1; y++)
@@ -24,24 +24,17 @@ namespace Assets.Scripts.Util
             }
         }
 
-        /* Old
-        public SpriteSet(string spriteSheet)
-        {
-            sprites = new List<Sprite>();
-            Sprite[] loadedSprites = Resources.LoadAll<Sprite>(spriteSheet);
-            foreach (Sprite sprite in loadedSprites)
-            {
-                sprites.Add(sprite);
-            }
-        }
-        */
-
         public Sprite GetSpriteFromIndex(ushort index)
         {
             if (index >= sprites.Count)
                 return null;
 
             return sprites[index];
+        }
+
+        public int SpriteCount()
+        {
+            return sprites.Count;
         }
     }
 }
