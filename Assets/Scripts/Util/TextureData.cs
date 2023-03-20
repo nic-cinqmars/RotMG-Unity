@@ -13,10 +13,14 @@ namespace RotmgClient.Util
     {
         private Sprite textureSprite;
         private List<TextureData> randomTextureData = null;
+        private Sprite mask;
+        private AnimatedChar animatedChar;
 
         public TextureData()
         {
             textureSprite = AssetLibrary.GetUnknownSprite();
+            mask = null;
+            animatedChar = null;
         }
 
         public TextureData(XmlNode xml)
@@ -40,6 +44,21 @@ namespace RotmgClient.Util
                 {
                     randomTextureData.Add(new TextureData(texture));
                 }
+            }
+
+            XmlNode maskNode = xml.SelectSingleNode("Mask");
+            if (maskNode != null)
+            {
+                mask = AssetLibrary.GetSpriteFromSet(maskNode.SelectSingleNode("File").InnerText,
+                    Convert.ToUInt16(maskNode.SelectSingleNode("Index").InnerText));
+            }
+
+            XmlNode animatedTextureNode = xml.SelectSingleNode("AnimatedTexture");
+            if (animatedTextureNode != null)
+            {
+                animatedChar = AnimatedChars.GetAnimatedChar(animatedTextureNode.SelectSingleNode("File").InnerText,
+                    Convert.ToUInt16(animatedTextureNode.SelectSingleNode("Index")));
+                
             }
         }
 

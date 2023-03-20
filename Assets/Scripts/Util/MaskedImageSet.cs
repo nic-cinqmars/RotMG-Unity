@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Org.BouncyCastle.Math;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,24 @@ namespace RotmgClient.Util
         public MaskedImageSet(MaskedImage maskedImage, int width, int height) : 
             this(maskedImage.GetImage(), maskedImage.GetMask(), width, height)
         {
+        }
+
+        public MaskedImage GetMaskedImageFromIndex(ushort index)
+        {
+            if (index >= images.Count)
+                return null;
+
+            return images[index];
+        }
+
+        public List<MaskedImage> GetImages()
+        {
+            return images;
+        }
+
+        public int ImageCount()
+        {
+            return images.Count;
         }
     }
 }

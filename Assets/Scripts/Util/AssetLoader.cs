@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Util;
-using RotmgClient.Map;
+﻿using RotmgClient.Map;
 using RotmgClient.Objects;
 using System;
 using System.Collections.Generic;
@@ -34,6 +33,7 @@ namespace RotmgClient.Util
         public void Load()
         {
             AddImages();
+            AddAnimatedCharacters();
             ParseGroundFiles();
             ParseObjectFiles();
         }
@@ -93,6 +93,11 @@ namespace RotmgClient.Util
             AssetLibrary.AddSpriteSet("SakuraEnvironment8x8", "Sprites/SakuraEnvironment8x8", 8, 8);
             AssetLibrary.AddSpriteSet("SakuraEnvironment16x16", "Sprites/SakuraEnvironment16x16", 16, 16);
             AssetLibrary.AddSpriteSet("HanamiParts", "Sprites/HanamiParts8x8", 8, 8);
+        }
+
+        public void AddAnimatedCharacters()
+        {
+            AnimatedChars.AddAnimatedChar("players", "Sprites/players", "Sprites/playersMask", 56, 24, 8, 8, AnimatedChar.RIGHT);
         }
 
         public void ParseGroundFiles()

@@ -23,6 +23,7 @@ namespace RotmgClient.Objects
         private static readonly Dictionary<string, ushort> idToTypeLibrary = new Dictionary<string, ushort>();
         private static readonly Dictionary<ushort, string> typeToClassName = new Dictionary<ushort, string>();
         private static readonly Dictionary<ushort, string> typeToDisplayIdLibrary = new Dictionary<ushort, string>();
+        private static readonly Dictionary<ushort, XmlNode> xmlLibrary = new Dictionary<ushort, XmlNode>();
         //private static readonly Dictionary<ushort, AnimationsData> animationsDataLibrary = new Dictionary<ushort, AnimationsData>();
 
     public static void ParseFromXML(XmlDocument xml)
@@ -70,6 +71,8 @@ namespace RotmgClient.Objects
                 }
                 else
                 {
+                    xmlLibrary.Add(type, node);
+
                     ObjectProperties objectProperties = new ObjectProperties(node);
                     propertiesLibrary.Add(type, objectProperties);
 
@@ -118,14 +121,21 @@ namespace RotmgClient.Objects
         {
             if (typeToClassName.TryGetValue(objectType, out string className))
             {
+                GameObject gameObject = new GameObject(className);
                 Type type = Type.GetType("RotmgClient.Objects." + className);
                 if (type != null)
                 {
-                    GameObject gameObject = new GameObject(className);
                     gameObject.AddComponent(type);
+                    RotmgGameObject rotmgGameObject = gameObject.GetComponent<RotmgGameObject>();
+                    rotmgGameObject.Setup(xmlLibrary[objectType]);
                     return gameObject;
                 }
-                return new GameObject(className);
+                else
+                {
+                    RotmgGameObject rotmgGameObject = gameObject.AddComponent<RotmgGameObject>();
+                    rotmgGameObject.Setup(xmlLibrary[objectType]);
+                    return gameObject;
+                }
             }
             else
             {
@@ -147,6 +157,20 @@ namespace RotmgClient.Objects
                 Sprite sprite = Resources.Load<Sprite>("Sprites/UnsetTexture");
                 textureDataLibrary[objectType] = new TextureData();
                 return sprite;
+            }
+        }
+
+        public static TextureData GetTextureDataFromType(ushort objectType)
+        {
+            if (textureDataLibrary.TryGetValue(objectType, out TextureData textureData))
+            {
+                return textureData;
+            }
+            else
+            {
+                UnityEngine.Debug.LogErrorFormat("Could not find TextureData for object with type '{0}'. Setting '{0}' to default TextureData.", "0x" + objectType.ToString("x"));
+                textureDataLibrary[objectType] = new TextureData();
+                return textureDataLibrary[objectType];
             }
         }
 
