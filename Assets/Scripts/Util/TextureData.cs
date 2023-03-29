@@ -50,15 +50,14 @@ namespace RotmgClient.Util
             if (maskNode != null)
             {
                 mask = AssetLibrary.GetSpriteFromSet(maskNode.SelectSingleNode("File").InnerText,
-                    Convert.ToUInt16(maskNode.SelectSingleNode("Index").InnerText));
+                    Convert.ToUInt16(maskNode.SelectSingleNode("Index").InnerText, 16));
             }
 
             XmlNode animatedTextureNode = xml.SelectSingleNode("AnimatedTexture");
             if (animatedTextureNode != null)
             {
                 animatedChar = AnimatedChars.GetAnimatedChar(animatedTextureNode.SelectSingleNode("File").InnerText,
-                    Convert.ToUInt16(animatedTextureNode.SelectSingleNode("Index")));
-                
+                    Convert.ToUInt16(animatedTextureNode.SelectSingleNode("Index").InnerText, 16));
             }
         }
 
@@ -69,6 +68,21 @@ namespace RotmgClient.Util
 
             TextureData textureData = randomTextureData[random % randomTextureData.Count];
             return textureData.GetTextureSprite();
+        }
+
+        public AnimatedChar GetAnimatedChar()
+        {
+            return animatedChar;
+        }
+
+        public List<TextureData> GetRandomTextureData()
+        {
+            return randomTextureData;
+        }
+
+        public Sprite GetMask()
+        {
+            return mask;
         }
     }
 }

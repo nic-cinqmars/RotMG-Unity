@@ -20,9 +20,10 @@ namespace RotmgClient.Objects
         private float y = 0;
         private ObjectProperties objectProperties;
 
+        private List<TextureData> randomTextureData = null;
         private AnimatedChar animatedChar = null;
         private Sprite sprite = null;
-        private Texture2D mask = null;
+        private Sprite mask = null;
 
         private int myLastTickId = -1;
         private int lastTickUpdateTime = 0;
@@ -49,6 +50,9 @@ namespace RotmgClient.Objects
 
             TextureData textureData = ObjectLibrary.GetTextureDataFromType(objectType);
             sprite = textureData.GetTextureSprite();
+            animatedChar = textureData.GetAnimatedChar();
+            mask = textureData.GetMask();
+            randomTextureData = textureData.GetRandomTextureData();
         }
 
         protected void Update()
