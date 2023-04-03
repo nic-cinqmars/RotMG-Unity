@@ -72,6 +72,11 @@ public class GameMap : MonoBehaviour
             rotmgGameObject.AddTo(this, gO.transform.localPosition);
             objectDict.Add(objectData.status.objectId, rotmgGameObject);
         }
+
+        foreach (RotmgGameObject rGO in objectDict.Values)
+        {
+            rGO.Draw();
+        }
     }
 
 

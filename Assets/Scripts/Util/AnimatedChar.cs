@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -59,6 +60,21 @@ namespace RotmgClient.Util
             }
             else
                 Debug.Log("Invalid first direction!");
+        }
+
+        public MaskedImage GetImageFromDir(int direction, int state)
+        {
+            List<MaskedImage> directionImage = directionToSprite[direction][state];
+            if (directionImage == null)
+                return null;
+
+            return directionImage[0];
+        }
+
+        public MaskedImage GetImageFromFacing()
+        {
+            //Todo
+            return null;
         }
 
         private Dictionary<int, List<MaskedImage>> CreateDirectionDictionary(MaskedImageSet imageSet, ushort startIndex, bool flipped, bool sameWalkImage)

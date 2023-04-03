@@ -74,6 +74,25 @@ namespace RotmgClient.Objects
             }
         }
 
+        private Sprite GetTexture()
+        {
+            if (animatedChar != null)
+            {
+                MaskedImage image = animatedChar.GetImageFromDir(AnimatedChar.RIGHT, AnimatedChar.STAND);
+                Sprite sprite = Sprite.Create(image.GetImage(), new Rect(0, 0, 8, 8), new Vector2(0.5f, 0.5f), 8);
+                return sprite;
+            }
+            else
+            {
+                return sprite;
+            }
+        }
+
+        public void Draw()
+        {
+            GetComponent<SpriteRenderer>().sprite = GetTexture();
+        }
+
         public ushort GetObjectType()
         {
             return objectType;

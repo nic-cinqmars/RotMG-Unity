@@ -32,6 +32,27 @@ namespace RotmgClient.Util
             return sprites[index];
         }
 
+        public Texture2D GetTexture2DFromIndex(ushort index)
+        {
+            Sprite sprite = GetSpriteFromIndex(index);
+            if (sprite == null)
+                return null;
+
+            int width = (int)sprite.rect.width;
+            int height = (int)sprite.rect.height;
+            int x = (int)sprite.rect.x;
+            int y = (int)sprite.rect.y;
+
+            Texture2D texture = new Texture2D(width, height);
+            texture.alphaIsTransparency = true;
+            texture.filterMode = FilterMode.Point;
+            Color[] colors = sprite.texture.GetPixels(x, y, width, height);
+            texture.SetPixels(colors, 0);
+            texture.Apply();
+
+            return texture;
+        }
+
         public int SpriteCount()
         {
             return sprites.Count;

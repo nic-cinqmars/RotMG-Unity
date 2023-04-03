@@ -24,11 +24,11 @@ namespace RotmgClient.Util
 
             for (ushort i = 0; i < imageSet.SpriteCount(); i++)
             {
-                Texture2D image = imageSet.GetSpriteFromIndex(i).texture;
+                Texture2D image = imageSet.GetTexture2DFromIndex(i);
                 Texture2D mask = null;
                 if (maskSet != null)
                 {
-                    mask = maskSet.GetSpriteFromIndex(i).texture;
+                    mask = maskSet.GetTexture2DFromIndex(i);
                 }
                 images.Add(new MaskedImage(image, mask));
             }
