@@ -14,7 +14,7 @@ namespace RotmgClient.Networking.Packets.Incoming
         public ushort ContainerType { get; set; }
         public float Angle { get; set; }
 
-        public override PacketId packetId => PacketId.ALLYSHOOT;
+        public override PacketId packetId => PacketId.AllyShoot;
 
         public override void Read(NReader nR)
         {

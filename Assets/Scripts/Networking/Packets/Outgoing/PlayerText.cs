@@ -10,7 +10,7 @@ namespace RotmgClient.Networking.Packets.Outgoing
     {
         public string Text { get; set; }
 
-        public override PacketId packetId => PacketId.PLAYERTEXT;
+        public override PacketId packetId => PacketId.PlayerText;
 
         public override void Read(NReader nR)
         {

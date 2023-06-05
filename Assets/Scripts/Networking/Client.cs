@@ -15,11 +15,15 @@ using System.Json;
 using UnityEngine;
 using System.Runtime.CompilerServices;
 using RotmgClient.Objects;
+using Org.BouncyCastle.Crypto.Tls;
+using RotmgClient.Game;
 
 namespace RotmgClient.Networking
 {
     public class Client : MonoBehaviour
     {
+        private GameManager gameManager;
+
         public static Client Instance;
 
         [SerializeField]
@@ -28,19 +32,18 @@ namespace RotmgClient.Networking
         private int port = 2050;
 
         [SerializeField]
-        private string guid;
+        private string username = "Test";
         [SerializeField]
-        private string password;
-
-        public int lastUpdate;
-        public int lastTickId;
+        private string password = "nico55mars";
 
         private TcpClient client;
         private NetworkStream? nStream;
         private PacketBuffer packetBuffer;
 
-        private int playerID = -1;
-        private int charID = 1;
+        private int gameID;
+        private int playerID;
+        private int charID;
+        private string? mapJSON;
 
         private bool isConnected = false;
 
@@ -50,6 +53,14 @@ namespace RotmgClient.Networking
 
         private Stack<Action> callbacksStack = new Stack<Action>();
 
+        public void Initialize(GameManager gameManager, int gameID, bool createCharacter, int charID, string mapJSON)
+        {
+            this.gameManager = gameManager;
+            this.gameID = gameID;
+            this.charID = charID;
+            this.mapJSON = mapJSON;
+        }
+
         private void Awake()
         {
             if (Instance != null)
@@ -57,10 +68,7 @@ namespace RotmgClient.Networking
                 Destroy(Instance);
             }
             Instance = this;
-        }
 
-        void Start() 
-        {
             SetupPacketHooks();
         }
 
@@ -71,10 +79,6 @@ namespace RotmgClient.Networking
 
         void Update()
         {
-            if (isConnected)
-            {
-                lastUpdate = (int)(DateTime.UtcNow - System.Diagnostics.Process.GetCurrentProcess().StartTime.ToUniversalTime()).TotalMilliseconds;
-            }
             while (callbacksStack.Count > 0)
             {
                 var callback = callbacksStack.Pop();
@@ -129,15 +133,11 @@ namespace RotmgClient.Networking
             if (!isConnected)
             {
                 HelloPacket state = new HelloPacket();
-                state.buildVersion = "27.7.X13";
-                state.gameID = -2;
-                state.guid = guid;
+                state.buildVersion = "0.0.1";
+                state.gameID = gameID;
+                state.username = username;
                 state.password = password;
-                state.secret = "";
-                state.keyTime = -1;
-                state.key = new byte[0];
-                state.mapJSON = "";
-                state.hash = "242a6266d2f11b6420af33a94882c4d3";
+                state.mapJSON = mapJSON == null ? "" : mapJSON;
 
                 client = new TcpClient();
                 client.NoDelay = true;
@@ -151,7 +151,7 @@ namespace RotmgClient.Networking
 
         private void OnConnected(IAsyncResult ar)
         {
-            Debug.Log("Connected");
+            Debug.Log("Connected TcpClient");
             isConnected = true;
             client.EndConnect(ar);
             packetBuffer = new PacketBuffer();
@@ -177,7 +177,7 @@ namespace RotmgClient.Networking
                 return;
             }
 
-            //Debug.Log("Sending packet " + packet.packetId.ToString());
+            Debug.Log("Sending packet " + packet.packetId.ToString());
             MemoryStream mS = new MemoryStream();
             using (NWriter pW = new NWriter(mS))
             {
@@ -187,7 +187,7 @@ namespace RotmgClient.Networking
 
                 byte[] data = mS.ToArray();
                 NWriter.BlockCopyInt32(data, data.Length);
-                packet.Crypt(data, 5, data.Length - 5);
+                //packet.Crypt(data, 5, data.Length - 5);
 
                 nStream.Write(data, 0, data.Length);
             }
@@ -235,14 +235,13 @@ namespace RotmgClient.Networking
             }
             else
             {
-                RC4.getInstance().CryptRecieve(packetBuffer.bytes, 5, packetBuffer.bytes.Length - 5);
                 using (NReader pR = new NReader(new MemoryStream(packetBuffer.bytes)))
                 {
                     pR.ReadInt32();
                     byte id = pR.ReadByte();
                     PacketId packetID = (PacketId)id;
 
-                    //Debug.Log("Recieved packet " + packetID.ToString());
+                    Debug.Log("Recieved packet " + packetID.ToString());
 
                     if (incomingPackets.TryGetValue(packetID, out Type? packetType))
                     {
@@ -252,7 +251,14 @@ namespace RotmgClient.Networking
                             Debug.Log("Error creating packet with id " + (int)packetID);
                             return;
                         }
-                        packet.Read(pR);
+                        try
+                        {
+                            packet.Read(pR);
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.LogException(ex);
+                        }
                         if (packetCallbacks.TryGetValue(packetType, out object? callback))
                         {
                             callbacksStack.Push(() =>
@@ -287,27 +293,13 @@ namespace RotmgClient.Networking
             }
         }
 
-        private void OnQueuePing(QueuePingPacket packet)
-        {
-            QueuePongPacket pongPacket = new QueuePongPacket();
-            pongPacket.serial = packet.serial;
-            pongPacket.time = (int)(DateTime.UtcNow - System.Diagnostics.Process.GetCurrentProcess().StartTime.ToUniversalTime()).TotalMilliseconds;
-            SendPacket(pongPacket);
-        }
-
-        private void OnPing(PingPacket packet)
-        {
-            PongPacket pongPacket = new PongPacket();
-            pongPacket.Serial = packet.serial;
-            pongPacket.Time = (int)(DateTime.UtcNow - System.Diagnostics.Process.GetCurrentProcess().StartTime.ToUniversalTime()).TotalMilliseconds;
-            SendPacket(pongPacket);
-        }
-
         private void OnMapInfo(MapInfoPacket packet)
         {
+            Debug.Log("OnMapInfo Called");
+            gameManager.ApplyMapInfo(packet);
+
             LoadPacket loadPacket = new LoadPacket();
             loadPacket.CharId = charID;
-            loadPacket.IsFromArena = false;
             SendPacket(loadPacket);
         }
 
@@ -318,18 +310,20 @@ namespace RotmgClient.Networking
 
         private void OnUpdate(UpdatePacket packet)
         {
-            Debug.Log("UpdatePacket");
-            UpdateAckPacket updateAckPacket = new UpdateAckPacket();
-            SendPacket(updateAckPacket);
 
             for (int i = 0; i < packet.Tiles.Length; i++)
             {
-                GameMap.Instance.AddTile(packet.Tiles[i]);
+                gameManager.map.AddTile(packet.Tiles[i]);
             }
 
             for (int i = 0; i < packet.NewObjs.Length; i++)
             {
-                GameMap.Instance.AddObject(packet.NewObjs[i]);
+                gameManager.map.AddObject(packet.NewObjs[i]);
+            }
+
+            for (int i = 0; i < packet.Drops.Length; i++)
+            {
+                gameManager.map.RemoveObject(packet.Drops[i].objectId);
             }
 
             /* DEBUG
@@ -355,13 +349,12 @@ namespace RotmgClient.Networking
         {
             foreach (ObjectStatusData objectStatusData in packet.Statuses)
             {
-                RotmgGameObject rotmgGameObject = GameMap.Instance.GetGameObject(objectStatusData.objectId);
+                RotmgGameObject rotmgGameObject = gameManager.map.GetGameObject(objectStatusData.objectId);
                 if (rotmgGameObject != null)
                 {
-                    rotmgGameObject.OnTickPos(objectStatusData.pos.x, objectStatusData.pos.y, packet.TickTime, packet.TickId);
+                    rotmgGameObject.OnTickPos(objectStatusData.pos.x, objectStatusData.pos.y);
                 }
             }
-            lastTickId = packet.TickId;
             /*
             // Debug
             for (int i = 0; i < packet.Statuses.Length; i++)

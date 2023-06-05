@@ -2,6 +2,7 @@
 using RotmgClient.Util;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,21 +26,16 @@ namespace RotmgClient.Objects
         private Sprite sprite = null;
         private Sprite mask = null;
 
-        private int myLastTickId = -1;
-        private int lastTickUpdateTime = 0;
-
-        public Vector2 posAtTick;
-        public Vector2 tickPosition;
-        public Vector2 movementVector;
+        public Vector2 targetPostion;
+        public Vector2 direction;
 
         public virtual void Setup(XmlNode xml)
         {
             Debug.Log("Calling RotmgGameObject setup");
             x = 0;
             y = 0;
-            posAtTick = Vector2.zero;
-            tickPosition = Vector2.zero;
-            movementVector = Vector2.zero;
+            targetPostion = Vector2.zero;
+            direction = Vector2.zero;
             objectProperties = new ObjectProperties();
 
             if (xml == null)
@@ -57,20 +53,29 @@ namespace RotmgClient.Objects
 
         protected void Update()
         {
-            if (movementVector.x != 0 || movementVector.y != 0)
+            if (direction.x != 0 || direction.y != 0)
             {
-                if (myLastTickId < Client.Instance.lastTickId)
+                float directionX = direction.x * Time.deltaTime * 1000;
+                float directionY = direction.y * Time.deltaTime * 1000;
+
+                float newX = x + directionX;
+                float newY = y + directionY;
+
+                if ((direction.x > 0 && newX > targetPostion.x) || 
+                    (direction.x < 0 && newX < targetPostion.x))
                 {
-                    movementVector.x = 0;
-                    movementVector.y = 0;
-                    moveTo(tickPosition);
+                    newX = targetPostion.x;
+                    direction.x = 0;
                 }
-                else
+
+                if ((direction.y > 0 && newY > targetPostion.y) ||
+                    (direction.y < 0 && newY < targetPostion.y))
                 {
-                    int offset = Client.Instance.lastUpdate - lastTickUpdateTime;
-                    Vector2 newPos = new Vector2(posAtTick.x + (offset * movementVector.x), posAtTick.y + (offset * movementVector.y));
-                    moveTo(newPos);
+                    newY = targetPostion.y;
+                    direction.y = 0;
                 }
+
+                moveTo(new Vector2(newX, newY));
             }
         }
 
@@ -101,24 +106,20 @@ namespace RotmgClient.Objects
         public void AddTo(GameMap map, Vector2 position)
         {
             this.map = map;
-            tickPosition = position;
-            posAtTick = position;
+            targetPostion = position;
+            direction = Vector2.zero;
             moveTo(position);
         }
 
-        public void OnTickPos(float x, float y, int tickTime, int tickID) 
+        public void OnTickPos(float x, float y) 
         {
-            if (myLastTickId < Client.Instance.lastTickId) 
-                moveTo(tickPosition);
+            if (targetPostion.x == x && targetPostion.y == y)
+                return;
 
-            lastTickUpdateTime = Client.Instance.lastUpdate;
-            tickPosition.x = x;
-            tickPosition.y = y;
-            posAtTick.x = this.x;
-            posAtTick.y = this.y;
-            movementVector.x = ((tickPosition.x - posAtTick.x) / tickTime);
-            movementVector.y = ((tickPosition.y - posAtTick.y) / tickTime);
-            myLastTickId = tickID;
+            targetPostion.x = x;
+            targetPostion.y = y;
+            direction.x = (targetPostion.x - this.x) / 127; //magic according to Skilly?
+            direction.y = (targetPostion.y - this.y) / 127;
         }
 
         public void moveTo(Vector2 newPos)

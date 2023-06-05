@@ -2,16 +2,15 @@ using RotmgClient.Map;
 using RotmgClient.Networking.Data;
 using RotmgClient.Objects;
 using RotmgClient.Util;
+using System;
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
 
-public class GameMap : MonoBehaviour
+public class GameMap : MonoBehaviour, IGameMap
 {
-    public static GameMap Instance;
-
-    [SerializeField]
-    private Transform gameObjectsTransform;
+    private GameObject tilesGameObject;
+    private GameObject rotmgObjectsGameObject;
 
     private Stack<GroundTile> groundTiles;
 
@@ -19,29 +18,45 @@ public class GameMap : MonoBehaviour
 
     private Stack<ObjectData> newObjects;
 
+    private Stack<int> idsToRemove;
+
     private Dictionary<int, RotmgGameObject> objectDict;
 
-    void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
+    private Player player;
+
+    // Map properties
+    private int width;
+    private int height;
+    private string mapName;
+    private int background;
+    private bool allowPlayerTeleport;
+    private bool showDisplays;
 
     void Start()
     {
-        AssetLoader assetLoader = new AssetLoader();
-        assetLoader.Load();
+        GameObject mapGameObject = new GameObject("Map");
+        tilesGameObject = new GameObject("Tiles");
+        tilesGameObject.transform.parent = mapGameObject.transform;
+        rotmgObjectsGameObject = new GameObject("Objects");
+        rotmgObjectsGameObject.transform.parent = mapGameObject.transform;
+
+        player = null;
 
         newGroundTiles = new Stack<GroundTileData>();
         newObjects = new Stack<ObjectData>();
+        idsToRemove = new Stack<int>();
         groundTiles = new Stack<GroundTile>();
         objectDict = new Dictionary<int, RotmgGameObject>();
+    }
+
+    public void SetProperties(int width, int height, string mapName, int background, bool allowPlayerTeleport, bool showDisplays)
+    {
+        this.width = width;
+        this.height = height;
+        this.mapName = mapName;
+        this.background = background;
+        this.allowPlayerTeleport = allowPlayerTeleport;
+        this.showDisplays = showDisplays;
     }
 
     void Update()
@@ -53,24 +68,35 @@ public class GameMap : MonoBehaviour
             groundTile.SetTileType(tileData.type);
 
             GameObject gameObject = new GameObject(tileData.type.ToString());
+            gameObject.transform.parent = tilesGameObject.transform;
+            gameObject.transform.localPosition = new Vector2(tileData.x, tileData.y);
+
             SpriteRenderer sprite = gameObject.AddComponent<SpriteRenderer>();
             sprite.sprite = groundTile.GetSprite();
             sprite.sortingOrder = -1;
-            gameObject.transform.parent = transform;
-            gameObject.transform.localPosition = new Vector2(tileData.x, tileData.y);
         }
         while (newObjects.Count > 0)
         {
             ObjectData objectData = newObjects.Pop();
             ushort objectType = objectData.objectType;
+
             GameObject gO = ObjectLibrary.GetObjectInstanceFromType(objectType);
-            SpriteRenderer spriteRenderer = gO.AddComponent<SpriteRenderer>();
-            spriteRenderer.sprite = ObjectLibrary.GetSpriteFromType(objectType);
-            gO.transform.parent = gameObjectsTransform;
+            gO.transform.parent = rotmgObjectsGameObject.transform;
             gO.transform.localPosition = new Vector2(objectData.status.pos.x, objectData.status.pos.y);
+
             RotmgGameObject rotmgGameObject = gO.GetComponent<RotmgGameObject>();
             rotmgGameObject.AddTo(this, gO.transform.localPosition);
             objectDict.Add(objectData.status.objectId, rotmgGameObject);
+        }
+
+        while (idsToRemove.Count > 0)
+        {
+            int objectID = idsToRemove.Pop();
+
+            RotmgGameObject rotmgGameObject = objectDict[objectID];
+            Destroy(rotmgGameObject.gameObject);
+
+            objectDict.Remove(objectID);
         }
 
         foreach (RotmgGameObject rGO in objectDict.Values)
@@ -88,6 +114,11 @@ public class GameMap : MonoBehaviour
     public void AddObject(ObjectData objectData)
     {
         newObjects.Push(objectData);
+    }
+
+    public void RemoveObject(int objectID)
+    {
+        idsToRemove.Push(objectID);
     }
 
     public RotmgGameObject GetGameObject(int objectId)

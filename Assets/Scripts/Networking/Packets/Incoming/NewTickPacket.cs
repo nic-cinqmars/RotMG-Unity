@@ -1,26 +1,32 @@
 ﻿using RotmgClient.Networking.Data;
 using System;
+using System.Net.Sockets;
 
 namespace RotmgClient.Networking.Packets.Incoming
 {
     public class NewTickPacket : IncomingPacket
     {
-        public override PacketId packetId => PacketId.NEWTICK;
-
-        public int TickId { get; set; }
-        public int TickTime { get; set; }
+        public override PacketId packetId => PacketId.NewTick;
         public ObjectStatusData[] Statuses { get; set; }
+        public StatData[] PlayerStats { get; set; }
 
         public override void Read(NReader nR)
         {
-            TickId = nR.ReadInt32();
-            TickTime = nR.ReadInt32();
-
             Statuses = new ObjectStatusData[nR.ReadInt16()];
             for (int i = 0; i < Statuses.Length; i++)
             {
                 Statuses[i] = new ObjectStatusData();
                 Statuses[i].Read(nR);
+            }
+
+            if (nR.BaseStream.Position != nR.BaseStream.Length)
+            {
+                PlayerStats = new StatData[nR.ReadByte()];
+                for (int i = 0; i < PlayerStats.Length; i++)
+                {
+                    PlayerStats[i] = new StatData();
+                    PlayerStats[i].Read(nR);
+                }
             }
         }
 

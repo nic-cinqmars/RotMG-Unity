@@ -15,6 +15,10 @@ namespace RotmgClient.Objects
 
         void Update()
         {
+            float playerAngle = 0;
+            float moveSpeed = 0;
+            float moveVecAngle = 0;
+            int d = 0;
             base.Update();
         }
     }

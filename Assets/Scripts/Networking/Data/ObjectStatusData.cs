@@ -13,7 +13,7 @@
             pos = new WorldPosData();
             pos.Read(nR);
 
-            stats = new StatData[nR.ReadInt16()];
+            stats = new StatData[nR.ReadByte()];
             for (int i = 0; i < stats.Length; i++)
             {
                 stats[i] = new StatData();

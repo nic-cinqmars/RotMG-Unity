@@ -8,7 +8,7 @@ namespace RotmgClient.Networking.Packets.Incoming
 {
     public class CreateSuccessPacket : IncomingPacket
     {
-        public override PacketId packetId => PacketId.CREATE_SUCCESS;
+        public override PacketId packetId => PacketId.CreateSuccess;
 
         public int ObjectId { get; set; }
         public int CharId { get; set; }

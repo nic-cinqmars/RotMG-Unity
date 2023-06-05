@@ -8,7 +8,7 @@ namespace RotmgClient.Networking.Packets.Incoming
 {
     public class GlobalNotificationPacket : IncomingPacket
     {
-        public override PacketId packetId => PacketId.GLOBAL_NOTIFICATION;
+        public override PacketId packetId => PacketId.Notification;
 
         public const int ADD_ARENA = 1;
         public const int DELETE_ARENA = 2;

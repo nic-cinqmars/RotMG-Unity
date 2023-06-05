@@ -26,7 +26,7 @@ namespace RotmgClient.Objects
         private static readonly Dictionary<ushort, XmlNode> xmlLibrary = new Dictionary<ushort, XmlNode>();
         //private static readonly Dictionary<ushort, AnimationsData> animationsDataLibrary = new Dictionary<ushort, AnimationsData>();
 
-    public static void ParseFromXML(XmlDocument xml)
+        public static void ParseFromXML(XmlDocument xml)
         {
             foreach (XmlNode node in xml.DocumentElement.SelectNodes("Object"))
             {
@@ -65,40 +65,33 @@ namespace RotmgClient.Objects
                     }
                 }
 
-                if (node.SelectSingleNode("PetBehavior") != null || node.SelectSingleNode("PetAbility") != null)
+                xmlLibrary.Add(type, node);
+
+                ObjectProperties objectProperties = new ObjectProperties(node);
+                propertiesLibrary.Add(type, objectProperties);
+
+                idToTypeLibrary.Add(id, type);
+                typeToDisplayIdLibrary.Add(type, displayId);
+
+                if (className == "Player")
                 {
                     //Todo
+                    UnityEngine.Debug.Log("Got class");
                 }
-                else
+
+                TextureData textureData = new TextureData(node);
+                textureDataLibrary.Add(type, textureData);
+
+                if (node.SelectSingleNode("Top") != null)
                 {
-                    xmlLibrary.Add(type, node);
+                    TextureData topTextureData = new TextureData(node.SelectSingleNode("Top"));
+                    topTextureDataLibrary.Add(type, topTextureData);
+                }
 
-                    ObjectProperties objectProperties = new ObjectProperties(node);
-                    propertiesLibrary.Add(type, objectProperties);
-
-                    idToTypeLibrary.Add(id, type);
-                    typeToDisplayIdLibrary.Add(type, displayId);
-
-                    if (className == "Player")
-                    {
-                        //Todo
-                        UnityEngine.Debug.Log("Got class");
-                    }
-
-                    TextureData textureData = new TextureData(node);
-                    textureDataLibrary.Add(type, textureData);
-
-                    if (node.SelectSingleNode("Top") != null)
-                    {
-                        TextureData topTextureData = new TextureData(node.SelectSingleNode("Top"));
-                        topTextureDataLibrary.Add(type, topTextureData);
-                    }
-
-                    if (node.SelectSingleNode("Animation") != null)
-                    {
-                        // Todo
-                        // Add AnimationsData to library
-                    }
+                if (node.SelectSingleNode("Animation") != null)
+                {
+                    // Todo
+                    // Add AnimationsData to library
                 }
             }
         }
@@ -122,6 +115,8 @@ namespace RotmgClient.Objects
             if (typeToClassName.TryGetValue(objectType, out string className))
             {
                 GameObject gameObject = new GameObject(className);
+                SpriteRenderer spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+                spriteRenderer.sprite = GetSpriteFromType(objectType);
                 Type type = Type.GetType("RotmgClient.Objects." + className);
                 if (type != null)
                 {

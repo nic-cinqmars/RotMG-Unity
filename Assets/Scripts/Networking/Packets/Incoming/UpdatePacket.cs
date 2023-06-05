@@ -9,32 +9,33 @@ namespace RotmgClient.Networking.Packets.Incoming
 {
     public class UpdatePacket : IncomingPacket
     {
-        public override PacketId packetId => PacketId.UPDATE;
+        public override PacketId packetId => PacketId.Update;
 
         public GroundTileData[] Tiles { get; set; }
         public ObjectData[] NewObjs { get; set; }
-        public int[] Drops { get; set; }
+        public ObjectDropData[] Drops { get; set; }
 
-        public override void Read(NReader pR)
+        public override void Read(NReader nR)
         {
-            Tiles = new GroundTileData[pR.ReadInt16()];
+            Tiles = new GroundTileData[nR.ReadInt16()];
             for (int i = 0; i < Tiles.Length; i++)
             {
                 Tiles[i] = new GroundTileData();
-                Tiles[i].Read(pR);
+                Tiles[i].Read(nR);
             }
 
-            NewObjs = new ObjectData[pR.ReadInt16()];
+            NewObjs = new ObjectData[nR.ReadInt16()];
             for (int i = 0; i < NewObjs.Length; i++)
             {
                 NewObjs[i] = new ObjectData();
-                NewObjs[i].Read(pR);
+                NewObjs[i].Read(nR);
             }
 
-            Drops = new int[pR.ReadInt16()];
+            Drops = new ObjectDropData[nR.ReadInt16()];
             for (int i = 0; i < Drops.Length; i++)
             {
-                Drops[i] = pR.ReadInt32();
+                Drops[i] = new ObjectDropData();
+                Drops[i].Read(nR);
             }
         }
 

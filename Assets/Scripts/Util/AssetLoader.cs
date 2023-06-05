@@ -15,20 +15,13 @@ namespace RotmgClient.Util
         private readonly string GROUND_PATH = "Data/Ground/";
         private readonly string OBJECT_PATH = "Data/Object/";
 
-        private readonly string[] GROUND_FILES = { "GroundCXML", "stPatricksGroundCXML", "hanaminexusGroundCXML", "mountainTempleGroundCXML" };
+        private readonly string[] GROUND_FILES = { "GroundCXML" };
         private readonly string[] OBJECT_FILES = { "ProjectilesCXML", "EquipCXML", "DyesCXML", "TextilesCXML", "PermapetsCXML", 
-            "TokenCXML", "WillemTestingCXML", "TTestingCXML", "BTestingCXML", "STestingCXML", "MTestingCXML", "KTestingCXML", 
-            "PlayersCXML", "ContainersCXML", "ObjectsCXML", "PortalsCXML", "TestingObjectsCXML", "StaticObjectsCXML", 
-            "TutorialObjectsCXML", "TutorialMonstersCXML", "AlliesCXML", "HeroesCXML", "PlayersZombiesCXML", "PetsCXML", 
-            "NPCsCXML", "ShoreCXML", "LowCXML", "MidCXML", "HighCXML", "MountainsCXML", "EncountersCXML", "ArenaCXML", 
-            "OryxCastleCXML", "TombOfTheAncientsCXML", "SpriteWorldCXML", "UndeadLairCXML", "OceanTrenchCXML", 
-            "ForbiddenJungleCXML", "OryxChamberCXML", "OryxChickenChamberCXML", "OryxWineCellarCXML", "ManorOfTheImmortalsCXML", 
-            "PirateCaveCXML", "SnakePitCXML", "SpiderDenCXML", "AbyssOfDemonsCXML", "GhostShipCXML", "MadLabCXML", 
-            "CaveOfAThousandTreasuresCXML", "CandyLandCXML", "HauntedCemeteryCXML", "ForestMazeCXML", "EpicForestMazeCXML", 
-            "EpicPirateCaveCXML", "EpicSpiderDenCXML", "NexusDestroyedCXML", "MiniDungeonHubCXML", "LairOfDraconisCXML", 
-            "LairOfShaitanCXML", "ShattersCXML", "BelladonnaCXML", "PuppetMasterCXML", "IceCaveCXML", "TheHiveCXML", "ToxicSewersCXML", 
-            "PuppetMasterEncoreCXML", "IceTombCXML", "stPatricksObjectCXML", "buffedBunnyObjectCXML", "hanaminexusObjectCXML", 
-            "mountainTempleObjectCXML" };
+            "PlayersCXML", "ObjectsCXML", "TestingObjectsCXML", "StaticObjectsCXML", "TutorialObjectsCXML", "MonstersCXML",
+            "PetsCXML", "TempObjectsCXML", "LowCXML", "MidCXML", "HighCXML", "MountainsCXML", "EncountersCXML", "OryxCastleCXML",
+            "TombOfTheAncientsCXML", "SpriteWorldCXML", "UndeadLairCXML", "OceanTrenchCXML", "ForbiddenJungleCXML", "OryxChamberCXML",
+            "OryxWineCellarCXML", "ManorOfTheImmortalsCXML", "PirateCaveCXML", "SnakePitCXML", "AbyssOfDemonsCXML", "GhostShipCXML",
+            "MadLabCXML", "CaveOfAThousandTreasuresCXML", "CandyLandCXML", "HauntedCemeteryCXML" };
 
         public void Load()
         {
@@ -64,7 +57,6 @@ namespace RotmgClient.Util
             AssetLibrary.AddSpriteSet("lofiObj40x40", "Sprites/lofiObj40x40", 40, 40);
             AssetLibrary.AddSpriteSet("lofiProjs", "Sprites/lofiProjs", 8, 8);
             AssetLibrary.AddSpriteSet("lofiProjsBig", "Sprites/lofiProjsBig", 16, 16);
-            AssetLibrary.AddSpriteSet("lofiParticlesShocker", "Sprites/lofiParticlesShocker", 16, 16);
             AssetLibrary.AddSpriteSet("lofiParts", "Sprites/lofiParts", 8, 8);
             AssetLibrary.AddSpriteSet("stars", "Sprites/stars", 5, 5);
             AssetLibrary.AddSpriteSet("textile4x4", "Sprites/textile4x4", 4, 4);
@@ -77,22 +69,7 @@ namespace RotmgClient.Util
             AssetLibrary.AddSpriteSet("innerP1_mask", "Sprites/innerP1Mask", 4, 4);
             AssetLibrary.AddSpriteSet("innerP2_mask", "Sprites/innerP2Mask", 4, 4);
             AssetLibrary.AddSpriteSet("invisible", "Sprites/Invisible", 8, 8);
-            AssetLibrary.AddSpriteSet("d1LofiObjBig", "Sprites/d1LofiObjBig", 16, 16);
-            AssetLibrary.AddSpriteSet("d2LofiObjEmbed", "Sprites/d2LofiObj", 8, 8);
-            AssetLibrary.AddSpriteSet("d2LofiObjBigEmbed", "Sprites/d2LofiObjBig", 16, 16);
-            AssetLibrary.AddSpriteSet("d3LofiObjEmbed", "Sprites/d3LofiObj", 8, 8);
-            AssetLibrary.AddSpriteSet("d3LofiObjEmbed16", "Sprites/d3LofiObj", 16, 16);
-            AssetLibrary.AddSpriteSet("d3LofiObjBigEmbed", "Sprites/d3LofiObjBig", 16, 16);
             AssetLibrary.AddSpriteSet("cursorsEmbed", "Sprites/cursors", 32, 32);
-            AssetLibrary.AddSpriteSet("mountainTempleObjects8x8", "Sprites/mountainTempleObjects8x8", 8, 8);
-            AssetLibrary.AddSpriteSet("mountainTempleObjects16x16", "Sprites/mountainTempleObjects16x16", 16, 16);
-            AssetLibrary.AddSpriteSet("stPatricksObjects8x8", "Sprites/stPatricksObjects8x8", 8, 8);
-            AssetLibrary.AddSpriteSet("stPatricksObjects16x16", "Sprites/stPatricksObjects16x16", 16, 16);
-            AssetLibrary.AddSpriteSet("buffedBunnyObjects8x8", "Sprites/buffedBunnyObjects8x8", 8, 8);
-            AssetLibrary.AddSpriteSet("buffedBunnyObjects16x16", "Sprites/buffedBunnyObjects16x16", 16, 16);
-            AssetLibrary.AddSpriteSet("SakuraEnvironment8x8", "Sprites/SakuraEnvironment8x8", 8, 8);
-            AssetLibrary.AddSpriteSet("SakuraEnvironment16x16", "Sprites/SakuraEnvironment16x16", 16, 16);
-            AssetLibrary.AddSpriteSet("HanamiParts", "Sprites/HanamiParts8x8", 8, 8);
         }
 
         public void AddAnimatedCharacters()

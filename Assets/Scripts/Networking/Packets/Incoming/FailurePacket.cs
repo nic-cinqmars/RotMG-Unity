@@ -8,7 +8,7 @@ namespace RotmgClient.Networking.Packets.Incoming
 {
     public class FailurePacket : IncomingPacket
     {
-        public override PacketId packetId => PacketId.FAILURE;
+        public override PacketId packetId => PacketId.Failure;
 
         public const int INCORRECT_VERSION = 4;
         public const int BAD_KEY = 5;
